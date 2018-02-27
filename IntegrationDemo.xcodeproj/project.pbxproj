@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D3BA2FECC242583DDA775DB /* Pods_IntegrationDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E169349719DDEA245898FC85 /* Pods_IntegrationDemo.framework */; };
 		BBB633FD20444D8E00A5060C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB633FC20444D8E00A5060C /* AppDelegate.swift */; };
 		BBB633FF20444D8E00A5060C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB633FE20444D8E00A5060C /* ViewController.swift */; };
 		BBB6340220444D8E00A5060C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBB6340020444D8E00A5060C /* Main.storyboard */; };
 		BBB6340420444D8E00A5060C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBB6340320444D8E00A5060C /* Assets.xcassets */; };
 		BBB6340720444D8E00A5060C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBB6340520444D8E00A5060C /* LaunchScreen.storyboard */; };
 		BBB6341220444D8E00A5060C /* IntegrationDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6341120444D8E00A5060C /* IntegrationDemoTests.swift */; };
+		BBB6341D20458DB300A5060C /* SambaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB6341C20458DB300A5060C /* SambaSDK.framework */; };
+		BBB6341E20458DB300A5060C /* SambaSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BBB6341C20458DB300A5060C /* SambaSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,7 +28,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BBB6341F20458DB300A5060C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BBB6341E20458DB300A5060C /* SambaSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9C256B1BD62584F77C807E2C /* Pods-IntegrationDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationDemo/Pods-IntegrationDemo.release.xcconfig"; sourceTree = "<group>"; };
 		BBB633F920444D8E00A5060C /* IntegrationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntegrationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBB633FC20444D8E00A5060C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBB633FE20444D8E00A5060C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +54,9 @@
 		BBB6340D20444D8E00A5060C /* IntegrationDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntegrationDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBB6341120444D8E00A5060C /* IntegrationDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationDemoTests.swift; sourceTree = "<group>"; };
 		BBB6341320444D8E00A5060C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBB6341C20458DB300A5060C /* SambaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaSDK.framework; path = SambaSDK/Debug/SambaSDK.framework; sourceTree = "<group>"; };
+		E169349719DDEA245898FC85 /* Pods_IntegrationDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntegrationDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2458CB3DCC747DEB0390DAD /* Pods-IntegrationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationDemo/Pods-IntegrationDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBB6341D20458DB300A5060C /* SambaSDK.framework in Frameworks */,
+				1D3BA2FECC242583DDA775DB /* Pods_IntegrationDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +79,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1123677FB3C9611C7EEF477F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBB6341C20458DB300A5060C /* SambaSDK.framework */,
+				E169349719DDEA245898FC85 /* Pods_IntegrationDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF4C009CD6B20C712B3D951D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F2458CB3DCC747DEB0390DAD /* Pods-IntegrationDemo.debug.xcconfig */,
+				9C256B1BD62584F77C807E2C /* Pods-IntegrationDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BBB633F020444D8E00A5060C = {
 			isa = PBXGroup;
 			children = (
 				BBB633FB20444D8E00A5060C /* IntegrationDemo */,
 				BBB6341020444D8E00A5060C /* IntegrationDemoTests */,
 				BBB633FA20444D8E00A5060C /* Products */,
+				AF4C009CD6B20C712B3D951D /* Pods */,
+				1123677FB3C9611C7EEF477F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,9 +146,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBB6341620444D8E00A5060C /* Build configuration list for PBXNativeTarget "IntegrationDemo" */;
 			buildPhases = (
+				8EBE93E7B62C93F84C349437 /* [CP] Check Pods Manifest.lock */,
 				BBB633F520444D8E00A5060C /* Sources */,
 				BBB633F620444D8E00A5060C /* Frameworks */,
 				BBB633F720444D8E00A5060C /* Resources */,
+				BBB6341F20458DB300A5060C /* Embed Frameworks */,
+				386C9423E527E9BB8A16DC88 /* [CP] Embed Pods Frameworks */,
+				8D8283AB17E5945309F751A3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,6 +240,64 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		386C9423E527E9BB8A16DC88 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-IntegrationDemo/Pods-IntegrationDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
+				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KissXML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntegrationDemo/Pods-IntegrationDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D8283AB17E5945309F751A3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntegrationDemo/Pods-IntegrationDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8EBE93E7B62C93F84C349437 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IntegrationDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BBB633F520444D8E00A5060C /* Sources */ = {
@@ -351,11 +456,17 @@
 		};
 		BBB6341720444D8E00A5060C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2458CB3DCC747DEB0390DAD /* Pods-IntegrationDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B59SMCDQ6C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SambaSDK/Debug",
+				);
 				INFOPLIST_FILE = IntegrationDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sambanetworks.IntegrationDemo.IntegrationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -366,11 +477,17 @@
 		};
 		BBB6341820444D8E00A5060C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C256B1BD62584F77C807E2C /* Pods-IntegrationDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B59SMCDQ6C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SambaSDK/Release",
+				);
 				INFOPLIST_FILE = IntegrationDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sambanetworks.IntegrationDemo.IntegrationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

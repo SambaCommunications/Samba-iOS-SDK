@@ -1,0 +1,18 @@
+PODS:
+  - Alamofire (4.6.0)
+  - KissXML (5.2.2)
+  - youtube-ios-player-helper (0.1.6)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.6)
+  - KissXML
+  - youtube-ios-player-helper (~> 0.1.4)
+
+SPEC CHECKSUMS:
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  KissXML: 4418f32138aec43797891845d682b00fc8cd4677
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
+
+PODFILE CHECKSUM: 3ec545072af2693a2abab5ef7a5b244de906264f
+
+COCOAPODS: 1.4.0

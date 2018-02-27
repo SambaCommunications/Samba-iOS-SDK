@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SambaSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let setup = SambaSetup(userId: "qwer", publisherId: 19, secretKey: "TextMeSecretKey")
+        let target = Target(age: 25, gender: .male)
+        let videoConfig = VideoConfig(screenOrientation: .auto)
+        
+        Samba.configure(setup: setup, videoConfig: videoConfig, target: target)
+        
         // Override point for customization after application launch.
         return true
     }
