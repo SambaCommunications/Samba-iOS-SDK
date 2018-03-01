@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                              createUnrulyPlayer();
+                              });
+                              
+            var ios = null;
+
+            function setupDelegate(delegate) {
+                this.ios = delegate
+                
+                console.log("set delegate: ");
+                console.log(ios);
+            }
+        
+            var eventType = {
+                Request: 0,
+                ContentRequested: 1,
+                ContentReady: 2,
+                PlayStarted: 3,
+                PlayCompleted: 4,
+                AdClicked: 5,
+                RatingSubmitted: 6,
+                ClickThrougUrlAccessed: 7,
+                Error: 16,
+                Impression: 17,
+                CreativeView: 18,
+                Midpoint: 19,
+                FirstQuartile: 20,
+                ThirdQuartile: 21,
+                Mute: 22,
+                Unmute: 23,
+                Pause: 24,
+                Resume: 25,
+                AdVideoFirstQuartile: 112,
+                AdVideoMidpoint: 113,
+                AdVideoThirdQuartile: 114
+            };
+        
+            function createUnrulyPlayer() {
+                if (window.addEventListener) {
+                    addEventListener("message", onCallbackMessage);
+                } else {
+                    attachEvent("onmessage", onCallbackMessage);
+                }
+            }
+
+            function onCallbackMessage(event) {
+                console.log(event);
+                var action=event.data;
+                console.log(action);
+                switch (action) {
+                case eventType.ContentReady.toString():
+                    console.log("Content Ready");
+                    ios.adImpression();
+                    break;
+                
+                case eventType.PlayStarted.toString():
+                    console.log("Ad started");
+                    ios.adStarted();
+                    break;
+                
+                case eventType.AdVideoFirstQuartile.toString():
+                    ios.adVideoFirstQuartile();
+                    break;
+                
+                case eventType.AdVideoMidpoint.toString():
+                    ios.adVideoMidPoint();
+                    break;
+                
+                case eventType.AdVideoThirdQuartile.toString():
+                    ios.adVideoThirdQuartile();
+                    break;
+                
+                case eventType.PlayCompleted.toString():
+                    ios.adCompleted();
+                    break;
+                
+                case eventType.AdClicked.toString():
+                    console.log("ad clicked");
+                    ios.adClicked();
+                    break;
+            }
+        }
+
+        </script>
+    </head>
+    
+    <body style="margin:0">
+        <div style="width:100%; height:100%; z-index: 3; position:absolute; -webkit-user-select: none;" class="ad">
+            <div id="container">
+                <iframe style='width:100%;height:100%;border:none;' src='[FILE_NAME]'/>
+            </div>
+        </div>
+    </body>
+</html>

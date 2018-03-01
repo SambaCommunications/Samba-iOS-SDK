@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        <style>
+            body {
+                margin: 0;
+            }
+        
+        #slot {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 2;
+            -webkit-user-select: none;
+        }
+        
+        #videoslot {
+            width: 100%;
+            position: fixed;
+            height: 100%;
+            z-index: 1;
+        }
+        </style>
+    </head>
+    <body>
+        <script>
+            VPAIDWrapper = function() {
+                this._creative = getVPAIDAd();
+                this.timer = null;
+                
+                VPAIDWrapper.prototype.setVpaidDelegate = function(delegate) {
+                    this._vpaidDelegate = delegate;
+                };
+                
+                VPAIDWrapper.prototype.checkVPAIDInterface = function() {
+                    if (this._creative.handshakeVersion && typeof this._creative.handshakeVersion == "function" && this._creative.initAd && typeof this._creative.initAd == "function" && this._creative.startAd && typeof this._creative.startAd == "function" && this._creative.stopAd && typeof this._creative.stopAd == "function" && this._creative.skipAd && typeof this._creative.skipAd == "function" && this._creative.resizeAd && typeof this._creative.resizeAd == "function" && this._creative.pauseAd && typeof this._creative.pauseAd == "function" && this._creative.resumeAd && typeof this._creative.resumeAd == "function" && this._creative.expandAd && typeof this._creative.expandAd == "function" && this._creative.collapseAd && typeof this._creative.collapseAd == "function" && this._creative.subscribe && typeof this._creative.subscribe == "function" && this._creative.unsubscribe && typeof this._creative.unsubscribe == "function") {
+                        return true;
+                    }
+                    return false;
+                };
+                
+                VPAIDWrapper.prototype.handshakeVersion = function(version) {
+                    return this._creative.handshakeVersion(version);
+                }
+                
+                VPAIDWrapper.prototype.initAd = function(width, height, viewMode, desiredBitrate, creativeData, environmentVars) {
+                    this._creative.initAd(width, height, viewMode, desiredBitrate, creativeData, environmentVars);
+                };
+                
+                VPAIDWrapper.prototype.onAdPaused = function() {
+                    console.log("onAdPaused");
+                    this._vpaidDelegate.vpaidAdPaused();
+                };
+                VPAIDWrapper.prototype.onAdPlaying = function() {
+                    console.log("onAdPlaying");
+                    this._vpaidDelegate.vpaidAdPlaying();
+                };
+                VPAIDWrapper.prototype.onAdError = function(message) {
+                    console.log("onAdError: " + message);
+                    this._vpaidDelegate.vpaidAdError(message);
+                };
+                VPAIDWrapper.prototype.onAdLog = function(message) {
+                    console.log("onAdLog: " + message);
+                    this._vpaidDelegate.vpaidAdLog(message);
+                };
+                VPAIDWrapper.prototype.onAdUserAcceptInvitation = function() {
+                    console.log("onAdUserAcceptInvitation");
+                    this._vpaidDelegate.vpaidAdUserAcceptInvitation();
+                };
+                VPAIDWrapper.prototype.onAdUserMinimize = function() {
+                    console.log("onAdUserMinimize");
+                    this._vpaidDelegate.vpaidAdUserMinimize();
+                };
+                VPAIDWrapper.prototype.onAdUserClose = function() {
+                    console.log("onAdUserClose");
+                    this._vpaidDelegate.vpaidAdUserClose();
+                };
+                VPAIDWrapper.prototype.onAdSkippableStateChange = function() {
+                    console.log("Ad Skippable State Changed to: " + this._creative.getAdSkippableState());
+                    this._vpaidDelegate.showSkipButton(this._creative.getAdSkippableState());
+                    this._vpaidDelegate.vpaidAdSkippableStateChange();
+                };
+                VPAIDWrapper.prototype.onAdExpandedChange = function() {
+                    console.log("Ad Expanded Changed to: " + this._creative.getAdExpanded());
+                    this._vpaidDelegate.vpaidAdExpandedChange();
+                };
+                VPAIDWrapper.prototype.getAdExpanded = function() {
+                    console.log("getAdExpanded");
+                    return this._creative.getAdExpanded();
+                };
+                VPAIDWrapper.prototype.getAdSkippableState = function() {
+                    return this._creative.getAdSkippableState();
+                };
+                VPAIDWrapper.prototype.onAdSizeChange = function() {
+                    console.log("Ad size changed to: w=" + this._creative.getAdWidth() + " h=" + this._creative.getAdHeight());
+                    this._vpaidDelegate.vpaidAdSizeChange();
+                };
+                VPAIDWrapper.prototype.onAdDurationChange = function() {
+                    if (this.handshakeVersion() >= 2) {
+                        var duration = this._creative.getAdDuration() - this._creative.getAdRemainingTime();
+                        var progress = duration / this._creative.getAdDuration();
+                        this._vpaidDelegate.vpaidUpdateProgress(progress);
+                    }
+                    this._vpaidDelegate.vpaidAdDurationChange();
+                };
+                VPAIDWrapper.prototype.onAdRemainingTimeChange = function() {
+                    if (this.handshakeVersion() < 2) {
+                        var duration = this._creative.getAdDuration() - this._creative.getAdRemainingTime();
+                        var progress = duration / this._creative.getAdDuration();
+                        this._vpaidDelegate.vpaidUpdateProgress(progress);
+                    }
+                    this._vpaidDelegate.vpaidAdRemainingTimeChange();
+                };
+                VPAIDWrapper.prototype.getAdRemainingTime = function() {
+                    return this._creative.getAdRemainingTime();
+                };
+                VPAIDWrapper.prototype.onAdImpression = function() {
+                    console.log("Ad Impression");
+                    this._vpaidDelegate.vpaidAdImpression();
+                };
+                VPAIDWrapper.prototype.onAdClickThru = function(url, id, playerHandles) {
+                    console.log("Clickthrough portion of the ad was clicked");
+                    console.log(this._vpaidDelegate);
+                    
+
+                    var adjustedUrl = url;
+                    if (adjustedUrl == undefined) {
+                        adjustedUrl = ""
+                    }
+                    
+                    console.log("URL: ");
+                    console.log(url);
+                    
+                    this._vpaidDelegate.vpaidAdClickThru(adjustedUrl, id, playerHandles);
+                };
+                VPAIDWrapper.prototype.onAdInteraction = function(id) {
+                    console.log("A non-clickthrough event has occured");
+                    this._vpaidDelegate.vpaidAdInteraction(id);
+                };
+                VPAIDWrapper.prototype.onAdVideoStart = function() {
+                    console.log("Video 0% completed");
+                    this._vpaidDelegate.vpaidAdVideoStart();
+                };
+                VPAIDWrapper.prototype.onAdVideoFirstQuartile = function() {
+                    console.log("Video 25% completed");
+                    this._vpaidDelegate.vpaidAdVideoFirstQuartile();
+                };
+                VPAIDWrapper.prototype.onAdVideoMidpoint = function() {
+                    console.log("Video 50% completed");
+                    this._vpaidDelegate.vpaidAdVideoMidpoint();
+                };
+                VPAIDWrapper.prototype.onAdVideoThirdQuartile = function() {
+                    console.log("Video 75% completed");
+                    this._vpaidDelegate.vpaidAdVideoThirdQuartile();
+                };
+                VPAIDWrapper.prototype.onAdVideoComplete = function() {
+                    console.log("Video 100% completed");
+                    this._vpaidDelegate.vpaidAdVideoComplete();
+                    
+                    this._vpaidDelegate = null;
+                };
+                VPAIDWrapper.prototype.onAdLinearChange = function() {
+                    console.log("Ad linear has changed: " + this._creative.getAdLinear());
+                    this._vpaidDelegate.vpaidAdLinearChange();
+                };
+                VPAIDWrapper.prototype.getAdLinear = function() {
+                    console.log("getAdLinear");
+                    return this._creative.getAdLinear();
+                };
+                VPAIDWrapper.prototype.getAdDuration = function() {
+                    console.log("getAdDuration");
+                    return this._creative.getAdDuration();
+                };
+                VPAIDWrapper.prototype.onAdLoaded = function() {
+                    console.log("ad has been loaded");
+                    this._vpaidDelegate.showSkipButton(this.getAdSkippableState());
+                    this._vpaidDelegate.vpaidAdLoaded();
+                };
+                VPAIDWrapper.prototype.onAdStarted = function() {
+                    console.log("Ad has started");
+
+                    this._vpaidDelegate.vpaidAdStarted();
+                };
+                VPAIDWrapper.prototype.onAdStopped = function() {
+                    console.log("Ad has stopped");
+                    clearInterval(this.timer);
+                    this._vpaidDelegate.vpaidAdStopped();
+                    
+                    this._vpaidDelegate = null;
+                };
+                VPAIDWrapper.prototype.onAdSkipped = function() {
+                    console.log("Ad was skipped");
+                    this._vpaidDelegate.vpaidAdSkipped();
+                    
+                    this._vpaidDelegate = null;
+                };
+                VPAIDWrapper.prototype.setAdVolume = function(val) {
+                    this._creative.setAdVolume(val);
+                };
+                VPAIDWrapper.prototype.getAdVolume = function() {
+                    return this._creative.getAdVolume();
+                };
+                VPAIDWrapper.prototype.onAdVolumeChange = function() {
+                    console.log("Ad Volume has changed to - " + this._creative.getAdVolume());
+                    this._vpaidDelegate.vpaidAdVolumeChanged();
+                };
+                VPAIDWrapper.prototype.startAd = function() {
+                    this._creative.startAd();
+                    console.log("Start ad called");
+                };
+                VPAIDWrapper.prototype.skipAd = function() {
+                    this._creative.skipAd();                    
+                };
+                VPAIDWrapper.prototype.stopAd = function() {
+                    this._creative.stopAd();
+                };
+                VPAIDWrapper.prototype.resizeAd = function(width, height, viewMode) {
+                    this._creative.resizeAd(width, height, viewMode);
+                };
+                VPAIDWrapper.prototype.pauseAd = function() {
+                    this._creative.pauseAd();
+                };
+                VPAIDWrapper.prototype.resumeAd = function() {
+                    this._creative.resumeAd();
+                };
+                VPAIDWrapper.prototype.expandAd = function() {
+                    this._creative.expandAd();
+                };
+                VPAIDWrapper.prototype.collapseAd = function() {
+                    this._creative.collapseAd();
+                };
+                VPAIDWrapper.prototype.setCallbacksForCreative = function() {
+                    var callbacks = {
+                        'AdStarted': this.onAdStarted,
+                        'AdStopped': this.onAdStopped,
+                        'AdSkipped': this.onAdSkipped,
+                        'AdLoaded': this.onAdLoaded,
+                        'AdLinearChange': this.onAdLinearChange,
+                        'AdSizeChange': this.onAdSizeChange,
+                        'AdExpandedChange': this.onAdExpandedChange,
+                        'AdSkippableStateChange': this.onAdSkippableStateChange,
+                        'AdDurationChange': this.onAdDurationChange,
+                        'AdRemainingTimeChange': this.onAdRemainingTimeChange,
+                        'AdVolumeChange': this.onAdVolumeChange,
+                        'AdImpression': this.onAdImpression,
+                        'AdClickThru': this.onAdClickThru,
+                        'AdInteraction': this.onAdInteraction,
+                        'AdVideoStart': this.onAdVideoStart,
+                        'AdVideoFirstQuartile': this.onAdVideoFirstQuartile,
+                        'AdVideoMidpoint': this.onAdVideoMidpoint,
+                        'AdVideoThirdQuartile': this.onAdVideoThirdQuartile,
+                        'AdVideoComplete': this.onAdVideoComplete,
+                        'AdUserAcceptInvitation': this.onAdUserAcceptInvitation,
+                        'AdUserMinimize': this.onAdUserMinimize,
+                        'AdUserClose': this.onAdUserClose,
+                        'AdPaused': this.onAdPaused,
+                        'AdPlaying': this.onAdPlaying,
+                        'AdError': this.onAdError,
+                        'AdLog': this.onAdLog
+                    };
+                    for (var eventName in callbacks) {
+                        this._creative.subscribe(callbacks[eventName], eventName, this);
+                    }
+                };
+                
+            }
+        
+        getVPAIDWrapper = function() {
+            var wrapper = new VPAIDWrapper();
+            wrapper.setCallbacksForCreative();
+            
+            console.log("getVPAIDWrapper called");
+            
+            return wrapper;
+        }
+        </script>
+        <script src="vpaid_script"></script>
+        
+        <div id="slot"></div>
+        <video id="videoslot" playsinline></video>
+    </body>
+</html>
