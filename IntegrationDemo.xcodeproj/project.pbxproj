@@ -13,20 +13,9 @@
 		BBB6340220444D8E00A5060C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBB6340020444D8E00A5060C /* Main.storyboard */; };
 		BBB6340420444D8E00A5060C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBB6340320444D8E00A5060C /* Assets.xcassets */; };
 		BBB6340720444D8E00A5060C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBB6340520444D8E00A5060C /* LaunchScreen.storyboard */; };
-		BBB6341220444D8E00A5060C /* IntegrationDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6341120444D8E00A5060C /* IntegrationDemoTests.swift */; };
 		BBB6341D20458DB300A5060C /* SambaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB6341C20458DB300A5060C /* SambaSDK.framework */; };
 		BBB6341E20458DB300A5060C /* SambaSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BBB6341C20458DB300A5060C /* SambaSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BBB6340E20444D8E00A5060C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBB633F120444D8E00A5060C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BBB633F820444D8E00A5060C;
-			remoteInfo = IntegrationDemo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		BBB6341F20458DB300A5060C /* Embed Frameworks */ = {
@@ -51,9 +40,6 @@
 		BBB6340320444D8E00A5060C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBB6340620444D8E00A5060C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBB6340820444D8E00A5060C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BBB6340D20444D8E00A5060C /* IntegrationDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntegrationDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBB6341120444D8E00A5060C /* IntegrationDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationDemoTests.swift; sourceTree = "<group>"; };
-		BBB6341320444D8E00A5060C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBB6341C20458DB300A5060C /* SambaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaSDK.framework; path = SambaSDK/Debug/SambaSDK.framework; sourceTree = "<group>"; };
 		E169349719DDEA245898FC85 /* Pods_IntegrationDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntegrationDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2458CB3DCC747DEB0390DAD /* Pods-IntegrationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationDemo/Pods-IntegrationDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -66,13 +52,6 @@
 			files = (
 				BBB6341D20458DB300A5060C /* SambaSDK.framework in Frameworks */,
 				1D3BA2FECC242583DDA775DB /* Pods_IntegrationDemo.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BBB6340A20444D8E00A5060C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				BBB633FB20444D8E00A5060C /* IntegrationDemo */,
-				BBB6341020444D8E00A5060C /* IntegrationDemoTests */,
 				BBB633FA20444D8E00A5060C /* Products */,
 				AF4C009CD6B20C712B3D951D /* Pods */,
 				1123677FB3C9611C7EEF477F /* Frameworks */,
@@ -112,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				BBB633F920444D8E00A5060C /* IntegrationDemo.app */,
-				BBB6340D20444D8E00A5060C /* IntegrationDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,15 +105,6 @@
 				BBB6340820444D8E00A5060C /* Info.plist */,
 			);
 			path = IntegrationDemo;
-			sourceTree = "<group>";
-		};
-		BBB6341020444D8E00A5060C /* IntegrationDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				BBB6341120444D8E00A5060C /* IntegrationDemoTests.swift */,
-				BBB6341320444D8E00A5060C /* Info.plist */,
-			);
-			path = IntegrationDemoTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,24 +131,6 @@
 			productReference = BBB633F920444D8E00A5060C /* IntegrationDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BBB6340C20444D8E00A5060C /* IntegrationDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BBB6341920444D8E00A5060C /* Build configuration list for PBXNativeTarget "IntegrationDemoTests" */;
-			buildPhases = (
-				BBB6340920444D8E00A5060C /* Sources */,
-				BBB6340A20444D8E00A5060C /* Frameworks */,
-				BBB6340B20444D8E00A5060C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BBB6340F20444D8E00A5060C /* PBXTargetDependency */,
-			);
-			name = IntegrationDemoTests;
-			productName = IntegrationDemoTests;
-			productReference = BBB6340D20444D8E00A5060C /* IntegrationDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -194,11 +144,6 @@
 					BBB633F820444D8E00A5060C = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
-					};
-					BBB6340C20444D8E00A5060C = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
-						TestTargetID = BBB633F820444D8E00A5060C;
 					};
 				};
 			};
@@ -216,7 +161,6 @@
 			projectRoot = "";
 			targets = (
 				BBB633F820444D8E00A5060C /* IntegrationDemo */,
-				BBB6340C20444D8E00A5060C /* IntegrationDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -229,13 +173,6 @@
 				BBB6340720444D8E00A5060C /* LaunchScreen.storyboard in Resources */,
 				BBB6340420444D8E00A5060C /* Assets.xcassets in Resources */,
 				BBB6340220444D8E00A5060C /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BBB6340B20444D8E00A5060C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,23 +246,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BBB6340920444D8E00A5060C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BBB6341220444D8E00A5060C /* IntegrationDemoTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BBB6340F20444D8E00A5060C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BBB633F820444D8E00A5060C /* IntegrationDemo */;
-			targetProxy = BBB6340E20444D8E00A5060C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BBB6340020444D8E00A5060C /* Main.storyboard */ = {
@@ -496,40 +417,6 @@
 			};
 			name = Release;
 		};
-		BBB6341A20444D8E00A5060C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B59SMCDQ6C;
-				INFOPLIST_FILE = IntegrationDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sambanetworks.IntegrationDemo.IntegrationDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IntegrationDemo.app/IntegrationDemo";
-			};
-			name = Debug;
-		};
-		BBB6341B20444D8E00A5060C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B59SMCDQ6C;
-				INFOPLIST_FILE = IntegrationDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sambanetworks.IntegrationDemo.IntegrationDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IntegrationDemo.app/IntegrationDemo";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -547,15 +434,6 @@
 			buildConfigurations = (
 				BBB6341720444D8E00A5060C /* Debug */,
 				BBB6341820444D8E00A5060C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BBB6341920444D8E00A5060C /* Build configuration list for PBXNativeTarget "IntegrationDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BBB6341A20444D8E00A5060C /* Debug */,
-				BBB6341B20444D8E00A5060C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
