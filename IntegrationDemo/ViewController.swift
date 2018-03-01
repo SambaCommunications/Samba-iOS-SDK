@@ -20,7 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var disableVideoSoundAtStart: UISwitch!
     @IBOutlet weak var errorLabel: UILabel!
     
-    lazy var manager = Samba.adManager!
+    //  Keep an instance of Samba Ad Manager.
+    lazy var adManager = Samba.adManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +39,12 @@ class ViewController: UIViewController {
         let optimizeDownloadOnMobileData = self.optimizeDownloadOnMobileData.isOn
         let disableVideoSoundAtStart = self.disableVideoSoundAtStart.isOn
         
-        let userId = "abcdef"
-        let publisherId = 14
-        let secretKey = "TextMeSecretKey"
-        
+        // Use/generate a unique ID for the current user
+        let userId = UUID().uuidString
+        let publisherId = 27
+        let secretKey = "YourSecretKey"
+ 
+        //  Configurate SambaSetup
         let sambaSetup = SambaSetup(userId: userId, publisherId: publisherId, secretKey: secretKey)
         
         let gender = Gender.male
@@ -50,9 +53,15 @@ class ViewController: UIViewController {
         
         let isSoundEnabled = !disableVideoSoundAtStart
         let screenOrientation = Orientation.auto
+        
+        //  Create video configuration
         let videoConfig = VideoConfig(screenOrientation: screenOrientation, soundEnabled: isSoundEnabled, optimizeDownloadOnMobileData: optimizeDownloadOnMobileData)
         
+        //  After we got all the data we can configure Samba
         Samba.configure(setup: sambaSetup, videoConfig: videoConfig, target: target)
+        
+        //  Set delegate in order to receive events (adDidLoad, adDidAppear, adDidReachEnd etc)
+        self.adManager.delegate = self
         
         updateUI(secretKey: secretKey, publisherId: publisherId)
     }
@@ -61,19 +70,22 @@ class ViewController: UIViewController {
         self.secretKey.text = secretKey
         self.publisherId.text = String(publisherId)
         
-        showBtn.isEnabled = self.manager.isReady
-        loadBtn.isEnabled = (!self.manager.isLoading && !self.manager.isReady)
-        self.manager.delegate = self
+        //  You should always check if ad is ready before showing it
+        showBtn.isEnabled = self.adManager.isReady
+        loadBtn.isEnabled = (!self.adManager.isLoading && !self.adManager.isReady)
     }
     
     @objc func loadButtonClicked() {
         loadBtn.isEnabled = false
         
-        self.manager.loadAd()
+        //  Call loadAd method when you want to receive content
+        self.adManager.loadAd()
     }
 
     @objc func showButtonClicked() {
-        self.manager.showAd(from: self)
+        
+        //  When content is ready you can call showAd method for showing the ad
+        self.adManager.showAd(from: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,6 +96,8 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: AdManagerProtocol {
+    
+    //  Method called when the Samba Ad finished loading
     func sambaAdDidLoad(_ adManager: AdManager) {
         DispatchQueue.main.async {
             self.errorLabel.text = ""
@@ -111,6 +125,7 @@ extension ViewController: AdManagerProtocol {
         
     }
     
+    //  Method called when the user tries to play an ad with age restriction and he is under 18
     func ageRestrictionNotMet(_ adManager: AdManager) {
         DispatchQueue.main.async {
             self.errorLabel.text = "You must be over 18 to watch the ads."
