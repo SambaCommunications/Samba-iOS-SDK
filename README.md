@@ -27,7 +27,7 @@ These three frameworks have to be included in your project. In order to do this,
 ## Let's get started 
 
 
-1. Please contact your SambaNetworks Account Manager or contact us at sales@sambanetworks.com in order to receive your publisherId and SecretKey. You need to use this later in your code.
+1. Please contact your SambaNetworks Account Manager or contact us at sales@sambanetworks.com in order to receive your publisherId and SecretKey. You need to use those later in your code.
 2. Add SambaSDK in your project in the following way:  
     a.  Download ```SambaSDK.framework```.  
     b.  Drag ```SambaSDK.framework``` directory into Xcode under Frameworks.  
