@@ -27,11 +27,11 @@ These three frameworks have to be included in your project. In order to do this,
 ## Let's get started 
 
 
-First of all, you need to create an account.. ( TODO: needs to be completed when the signing in procedure is defined). Here you will get your publisherId and secretKey. You need to use this later in your code.
-Add SambaSDK in your project in the following way: 
-Download ```SambaSDK.framework```.
-Drag ```SambaSDK.framework``` directory into Xcode under Frameworks.
-Now you should add ```Alamofire```, ```KissXML``` and ```youtube-ios-player-helper``` in your project. We recommend you to include them by using Cocoapods, but you can check each Framework's page to find more ways to do this. For adding them through Cocoapods, add in Podfile, the next lines:  
+1. First of all, you need to create an account.. ( TODO: needs to be completed when the signing in procedure is defined). Here you will get your publisherId and secretKey. You need to use this later in your code.
+2. Add SambaSDK in your project in the following way:  
+    a.  Download ```SambaSDK.framework```.  
+    b.  Drag ```SambaSDK.framework``` directory into Xcode under Frameworks.  
+    c.  Now you should add ```Alamofire```, ```KissXML``` and ```youtube-ios-player-helper``` in your project. We recommend           you to include them by using Cocoapods, but you can check each Framework's page to find more ways to do this. For             adding them through Cocoapods, add in Podfile, the next lines:  
                  ```pod 'Alamofire', '~> 4.6'``` <br/>
                  ```pod 'KissXML'``` <br />
                  ```pod 'youtube-ios-player-helper', '~> 0.1.4'``` <br />
