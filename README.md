@@ -114,7 +114,7 @@ The ```AdManagerProtocol``` includes the following events:
 
 | Method name | Description |
 | ----------- | ----------- |
-| `func sambaAdDidLoad(_ adManager: AdManager)`                | Called after an ad was succesfully loaded. |
+| `func sambaAdDidLoad(_ adManager: AdManager)` | Called after an ad was succesfully loaded. |
 | `func sambaAd(_ adManager: AdManager, didFailToLoad error: SambaError)` | Called if an error occurs. |
 | `func sambaAdDidAppear(_ adManager: AdManager)` | Called after the ad appeared on the screen. |
 | `func sambaAdDidDisappear(_ adManager: AdManager)` | Called after the ad disappeared from the screen. Here might be the place to reconfigure your app to the initial state (play the sound, restart the timers etc). |
