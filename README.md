@@ -112,62 +112,17 @@ self.adManager?.delegate = self
 The ```AdManagerProtocol``` includes the following events:
 
 
-| Method name | Description |
+| Method | Description |
 | ----------- | ----------- |
 | `func sambaAdDidLoad(_ adManager: AdManager)` | Called after an ad was succesfully loaded. |
-| `func sambaAd(_ adManager: AdManager, didFailToLoad error: SambaError)` | Called if an error occurs. |
+| `func sambaAd(_ adManager: AdManager, didFailToLoad error: SambaError)` | Called if an error occured. |
 | `func sambaAdDidAppear(_ adManager: AdManager)` | Called after the ad appeared on the screen. |
-| `func sambaAdDidDisappear(_ adManager: AdManager)` | Called after the ad disappeared from the screen. Here might be the place to reconfigure your app to the initial state (play the sound, restart the timers etc). |
+| `func sambaAdDidDisappear(_ adManager: AdManager)` | Called after the ad disappeared from the screen. This is a good place to reconfigure your app to the initial state (mute, restart the timers etc). |
 | `func sambaAd(_ adManager: AdManager, didReachEnd adCompleted: Bool)` | Called if the user watched the ad until the end. If you want to reward the user for watching an ad (adCompleted is true), or you want to return to where you've left off in your app, you could do it here. |
 | `func ageRestrictionNotMet(_ adManager: AdManager)` | If all the ads received were age restricted and the user did not qualify, this method is called. |
 
 **All callback methods are optional.**
 
-
---- Delete de aici in jos.
-
-
-After an ad is successfully loaded the following callback method is called:
-
-```
-@objc optional func sambaAdDidLoad(_ adManager: AdManager)
-```
-
-
-If an error occurs, the following callback method is called:
-
-```
-@objc optional func sambaAd(_ adManager: AdManager, didFailToLoad error: SambaError)
-```
-
-
-When the ad is shown, the following callback method is called:
-
-```
-@objc optional func sambaAdDidAppear(_ adManager: AdManager)
-```
-
-
-When the ad is dismissed, the following method is called. Here might be the place to reconfigure your app to the initial state (play the sound, restart the timers etc). 
-
-```
-@objc optional func sambaAdDidDisappear(_ adManager: AdManager)
-```
-
-
-If the user watched the ad until the end, the following callback method is called. If you want to reward the user for watching an ad (adCompleted is true), or you want to return to where you've left off in your app, you could do it here.
-
-```
-@objc optional func sambaAd(_ adManager: AdManager, didReachEnd adCompleted: Bool)
-```
-
-If all the ads received were age restricted and the user did not qualify, the following callback method is called. 
-
-```
-@objc optional func ageRestrictionNotMet(_ adManager: AdManager)
-```
-
---- Pana aici
 
 ## You're all set
 
