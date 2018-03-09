@@ -48,7 +48,7 @@ public static func configure(setup: SambaSetup, videoConfig: VideoConfig? = nil,
 
 There are 3 parameters that you can configure. SambaSetup ```(params: userId, publisherId, secretKey)``` is the only one which is required. ```userId``` is an unique String identifying each user in your app. It is a good practice to use some kind of a UUID, but other unique string will work as well.  ```publisherId``` and ```secretKey``` are received from Samba.
 
-If you would like to go further with the configuration, you can configure Target ```(params: age, gender)``` which represents the target audience and VideoConfig ```(params: screenOrientation, soundEnabled, downloadOnWifiOnly, allowPrecaching)```.
+If you would like to go further with the configuration, you can configure Target ```(params: age, gender)``` which represents the target audience and VideoConfig ```(params: screenOrientation, soundEnabled, optimizeDownloadOnMobileData)```.
 
 All the parameters in Target and VideoConfig objects are optionals. 
 
@@ -109,8 +109,22 @@ Set the delegate in order to receive those events:
 self.adManager?.delegate = self
 ```
 
-The ```AdManagerProtocol``` inclused the following events:
+The ```AdManagerProtocol``` includes the following events:
 
+
+| Method name | Description |
+| ----------- | ----------- |
+| `func sambaAdDidLoad(_ adManager: AdManager)`                | Called after an ad was succesfully loaded. |
+| `func sambaAd(_ adManager: AdManager, didFailToLoad error: SambaError)` | Called if an error occurs. |
+| `func sambaAdDidAppear(_ adManager: AdManager)` | Called after the ad appeared on the screen. |
+| `func sambaAdDidDisappear(_ adManager: AdManager)` | Called after the ad disappeared from the screen. Here might be the place to reconfigure your app to the initial state (play the sound, restart the timers etc). |
+| `func sambaAd(_ adManager: AdManager, didReachEnd adCompleted: Bool)` | Called if the user watched the ad until the end. If you want to reward the user for watching an ad (adCompleted is true), or you want to return to where you've left off in your app, you could do it here. |
+| `func ageRestrictionNotMet(_ adManager: AdManager)` | If all the ads received were age restricted and the user did not qualify, this method is called. |
+
+**All callback methods are optional.**
+
+
+--- Delete de aici in jos.
 
 
 After an ad is successfully loaded the following callback method is called:
@@ -152,6 +166,8 @@ If all the ads received were age restricted and the user did not qualify, the fo
 ```
 @objc optional func ageRestrictionNotMet(_ adManager: AdManager)
 ```
+
+--- Pana aici
 
 ## You're all set
 
