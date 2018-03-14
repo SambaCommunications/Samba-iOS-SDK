@@ -83,7 +83,7 @@ let adManager = AdManager?
 self.adManager = Samba.adManager
 ```
 
-Once this is done, you will be able to load an ad.
+Once this is done you will be able to load an ad.
 
 ```
 self.adManager?.loadAd()
