@@ -1,5 +1,10 @@
 # Samba SDK
 
+## Overview
+Our unique ad formats are loved by users and earn more money from advertisers, enhancing your app and earning you more at the same time. 
+
+Simply integrate our SDK and start making money today.
+
 ## Requirements
 The Samba SDK is compatible with iOS 9.0+ and uses certain Apple frameworks that should already be in your project:
 
