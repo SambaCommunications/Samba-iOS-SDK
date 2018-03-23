@@ -64,7 +64,7 @@ import SambaSDK
 
 ...
 
-let sambaSetup = SambaSetup(userId: currentUserId, publisherId: 27, secretKey: "sampleSecretKey")
+let sambaSetup = SambaSetup(userId: currentUserId, publisherId: 0, secretKey: "YourSecretKey")
 
 let adTarget = Target(age: 25, gender: Gender.female)
 

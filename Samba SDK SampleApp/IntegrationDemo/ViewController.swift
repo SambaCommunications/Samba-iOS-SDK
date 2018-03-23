@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         
         // Use/generate a unique ID for the current user
         let userId = UUID().uuidString
-        let publisherId = 27
+        let publisherId = 0
         let secretKey = "YourSecretKey"
  
         //  Configurate SambaSetup
