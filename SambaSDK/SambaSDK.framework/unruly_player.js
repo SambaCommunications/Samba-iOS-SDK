@@ -12,6 +12,10 @@ function setupDelegate(delegate) {
     this.ios = delegate
 }
 
+function cleanupDelegate() {
+    this.ios = null
+}
+
 function onCallbackMessage(event) {
     console.log(event);
     var action=event.data;

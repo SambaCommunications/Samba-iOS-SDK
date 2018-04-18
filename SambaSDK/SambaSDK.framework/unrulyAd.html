@@ -15,6 +15,10 @@
                 console.log(ios);
             }
         
+            function cleanupDelegate() {
+                this.ios = null
+            }
+        
             var eventType = {
                 Request: 0,
                 ContentRequested: 1,

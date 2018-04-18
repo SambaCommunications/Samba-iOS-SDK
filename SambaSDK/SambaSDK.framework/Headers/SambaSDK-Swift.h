@@ -315,6 +315,10 @@ SWIFT_CLASS("_TtC8SambaSDK6Target")
 
 
 
+
+
+
+
 SWIFT_CLASS("_TtC8SambaSDK11VideoConfig")
 @interface VideoConfig : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
