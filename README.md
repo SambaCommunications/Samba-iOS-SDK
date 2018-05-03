@@ -97,7 +97,7 @@ self.adManager?.loadAd()
 After the ad has loaded you can show it to the user however we recommend checking that the ad is ready before you do this. If you would like to make adjustments (e.g. disabling the sound or stopping certain timers) now is the best time to do so.
 
 ```
-if self.adManager?.isReady {
+if self.adManager?.state == .readyToShow {
 
      self.adManager?.showAd(from: self)
 

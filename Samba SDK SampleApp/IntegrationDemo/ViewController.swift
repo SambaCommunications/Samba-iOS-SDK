@@ -78,8 +78,8 @@ class ViewController: UIViewController {
         self.publisherId.text = String(publisherId)
         
         //  You should always check if ad is ready before showing it
-        showBtn.isEnabled = adManager.isReady
-        loadBtn.isEnabled = (!adManager.isLoading && !adManager.isReady)
+        showBtn.isEnabled = adManager.state == .readyToShow
+        loadBtn.isEnabled = adManager.state == .readyToLoad
     }
     
     @objc func loadButtonClicked() {

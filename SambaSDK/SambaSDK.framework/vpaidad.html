@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <head>
         <title> </title>
         <style>
@@ -7,20 +8,20 @@
                 margin: 0;
             }
         
-        #slot {
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            z-index: 2;
-            -webkit-user-select: none;
-        }
+            #slot {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                z-index: 2;
+                -webkit-user-select: none;
+            }
         
-        #videoslot {
-            width: 100%;
-            position: fixed;
-            height: 100%;
-            z-index: 1;
-        }
+            #videoslot {
+                width: 100%;
+                position: fixed;
+                height: 100%;
+                z-index: 1;
+            }
         </style>
     </head>
     <body>
@@ -50,40 +51,35 @@
                 
                 VPAIDWrapper.prototype.onAdPaused = function() {
                     console.log("onAdPaused");
-                    this._vpaidDelegate.vpaidAdPaused();
+                    window.webkit.messageHandlers.AdPausedHandler.postMessage(null);
                 };
                 VPAIDWrapper.prototype.onAdPlaying = function() {
                     console.log("onAdPlaying");
-                    this._vpaidDelegate.vpaidAdPlaying();
+                    window.webkit.messageHandlers.AdPlayingHandler.postMessage(null);
                 };
                 VPAIDWrapper.prototype.onAdError = function(message) {
                     console.log("onAdError: " + message);
-                    this._vpaidDelegate.vpaidAdError(message);
+                    window.webkit.messageHandlers.AdErrorHandler.postMessage(message);
                 };
                 VPAIDWrapper.prototype.onAdLog = function(message) {
                     console.log("onAdLog: " + message);
-                    this._vpaidDelegate.vpaidAdLog(message);
+                    window.webkit.messageHandlers.AdLogHandler.postMessage(message);
                 };
                 VPAIDWrapper.prototype.onAdUserAcceptInvitation = function() {
                     console.log("onAdUserAcceptInvitation");
-                    this._vpaidDelegate.vpaidAdUserAcceptInvitation();
                 };
                 VPAIDWrapper.prototype.onAdUserMinimize = function() {
                     console.log("onAdUserMinimize");
-                    this._vpaidDelegate.vpaidAdUserMinimize();
                 };
                 VPAIDWrapper.prototype.onAdUserClose = function() {
                     console.log("onAdUserClose");
-                    this._vpaidDelegate.vpaidAdUserClose();
+                    window.webkit.messageHandlers.AdUserCloseHandler.postMessage(null);
                 };
                 VPAIDWrapper.prototype.onAdSkippableStateChange = function() {
                     console.log("Ad Skippable State Changed to: " + this._creative.getAdSkippableState());
-                    this._vpaidDelegate.showSkipButton(this._creative.getAdSkippableState());
-                    this._vpaidDelegate.vpaidAdSkippableStateChange();
                 };
                 VPAIDWrapper.prototype.onAdExpandedChange = function() {
                     console.log("Ad Expanded Changed to: " + this._creative.getAdExpanded());
-                    this._vpaidDelegate.vpaidAdExpandedChange();
                 };
                 VPAIDWrapper.prototype.getAdExpanded = function() {
                     console.log("getAdExpanded");
@@ -93,36 +89,26 @@
                     return this._creative.getAdSkippableState();
                 };
                 VPAIDWrapper.prototype.onAdSizeChange = function() {
-                    console.log("Ad size changed to: w=" + this._creative.getAdWidth() + " h=" + this._creative.getAdHeight());
-                    this._vpaidDelegate.vpaidAdSizeChange();
+                    var message = "Ad size changed to: w=" + this._creative.getAdWidth() + " h=" + this._creative.getAdHeight()
+                    console.log(message);
+                    window.webkit.messageHandlers.AdSizeChangeHandler.postMessage(message);
                 };
                 VPAIDWrapper.prototype.onAdDurationChange = function() {
-                    if (this.handshakeVersion() >= 2) {
-                        var duration = this._creative.getAdDuration() - this._creative.getAdRemainingTime();
-                        var progress = duration / this._creative.getAdDuration();
-                        this._vpaidDelegate.vpaidUpdateProgress(progress);
-                    }
-                    this._vpaidDelegate.vpaidAdDurationChange();
+                    console.log("ad duration change")
                 };
                 VPAIDWrapper.prototype.onAdRemainingTimeChange = function() {
-                    if (this.handshakeVersion() < 2) {
-                        var duration = this._creative.getAdDuration() - this._creative.getAdRemainingTime();
-                        var progress = duration / this._creative.getAdDuration();
-                        this._vpaidDelegate.vpaidUpdateProgress(progress);
-                    }
-                    this._vpaidDelegate.vpaidAdRemainingTimeChange();
+                    var remainingTime = this._creative.getAdRemainingTime()
+                    window.webkit.messageHandlers.AdRemainingTimeChangeHandler.postMessage(remainingTime);
                 };
                 VPAIDWrapper.prototype.getAdRemainingTime = function() {
                     return this._creative.getAdRemainingTime();
                 };
                 VPAIDWrapper.prototype.onAdImpression = function() {
                     console.log("Ad Impression");
-                    this._vpaidDelegate.vpaidAdImpression();
+                    window.webkit.messageHandlers.AdImpressionHandler.postMessage(null);
                 };
                 VPAIDWrapper.prototype.onAdClickThru = function(url, id, playerHandles) {
                     console.log("Clickthrough portion of the ad was clicked");
-                    console.log(this._vpaidDelegate);
-                    
 
                     var adjustedUrl = url;
                     if (adjustedUrl == undefined) {
@@ -132,37 +118,36 @@
                     console.log("URL: ");
                     console.log(url);
                     
-                    this._vpaidDelegate.vpaidAdClickThru(adjustedUrl, id, playerHandles);
+                    var message = { url: adjustedUrl, playerHandles : playerHandles }
+                    
+                    window.webkit.messageHandlers.AdClickThroughHandler.postMessage(message);
                 };
                 VPAIDWrapper.prototype.onAdInteraction = function(id) {
                     console.log("A non-clickthrough event has occured");
-                    this._vpaidDelegate.vpaidAdInteraction(id);
                 };
                 VPAIDWrapper.prototype.onAdVideoStart = function() {
+                    var adDuration = this._creative.getAdDuration();
                     console.log("Video 0% completed");
-                    this._vpaidDelegate.vpaidAdVideoStart();
+                    window.webkit.messageHandlers.AdVideoStartedHandler.postMessage(adDuration);
                 };
                 VPAIDWrapper.prototype.onAdVideoFirstQuartile = function() {
                     console.log("Video 25% completed");
-                    this._vpaidDelegate.vpaidAdVideoFirstQuartile();
+                    window.webkit.messageHandlers.AdFirstQuartileHandler.postMessage(null);
                 };
                 VPAIDWrapper.prototype.onAdVideoMidpoint = function() {
                     console.log("Video 50% completed");
-                    this._vpaidDelegate.vpaidAdVideoMidpoint();
+                    window.webkit.messageHandlers.AdMidpointHandler.postMessage(null);
                 };
                 VPAIDWrapper.prototype.onAdVideoThirdQuartile = function() {
                     console.log("Video 75% completed");
-                    this._vpaidDelegate.vpaidAdVideoThirdQuartile();
+                    window.webkit.messageHandlers.AdThirdQuartileHandler.postMessage(null);
                 };
                 VPAIDWrapper.prototype.onAdVideoComplete = function() {
                     console.log("Video 100% completed");
-                    this._vpaidDelegate.vpaidAdVideoComplete();
-                    
-                    this._vpaidDelegate = null;
+                    window.webkit.messageHandlers.AdVideoCompleteHandler.postMessage(null)
                 };
                 VPAIDWrapper.prototype.onAdLinearChange = function() {
                     console.log("Ad linear has changed: " + this._creative.getAdLinear());
-                    this._vpaidDelegate.vpaidAdLinearChange();
                 };
                 VPAIDWrapper.prototype.getAdLinear = function() {
                     console.log("getAdLinear");
@@ -174,26 +159,20 @@
                 };
                 VPAIDWrapper.prototype.onAdLoaded = function() {
                     console.log("ad has been loaded");
-                    this._vpaidDelegate.showSkipButton(this.getAdSkippableState());
-                    this._vpaidDelegate.vpaidAdLoaded();
+                    window.webkit.messageHandlers.AdLoadedHandler.postMessage(null)
                 };
                 VPAIDWrapper.prototype.onAdStarted = function() {
                     console.log("Ad has started");
-
-                    this._vpaidDelegate.vpaidAdStarted();
+                    window.webkit.messageHandlers.AdStartedHandler.postMessage(null)
                 };
                 VPAIDWrapper.prototype.onAdStopped = function() {
                     console.log("Ad has stopped");
                     clearInterval(this.timer);
-                    this._vpaidDelegate.vpaidAdStopped();
-                    
-                    this._vpaidDelegate = null;
+                    window.webkit.messageHandlers.AdStoppedHandler.postMessage(null)
                 };
                 VPAIDWrapper.prototype.onAdSkipped = function() {
                     console.log("Ad was skipped");
-                    this._vpaidDelegate.vpaidAdSkipped();
-                    
-                    this._vpaidDelegate = null;
+                    window.webkit.messageHandlers.AdSkippedHandler.postMessage(null)
                 };
                 VPAIDWrapper.prototype.setAdVolume = function(val) {
                     this._creative.setAdVolume(val);
@@ -202,8 +181,9 @@
                     return this._creative.getAdVolume();
                 };
                 VPAIDWrapper.prototype.onAdVolumeChange = function() {
-                    console.log("Ad Volume has changed to - " + this._creative.getAdVolume());
-                    this._vpaidDelegate.vpaidAdVolumeChanged();
+                    var volume = this._creative.getAdVolume()
+                    console.log("Ad Volume has changed to - " + volume);
+                    window.webkit.messageHandlers.AdVolumeChangeHandler.postMessage(volume)
                 };
                 VPAIDWrapper.prototype.startAd = function() {
                     this._creative.startAd();
@@ -265,11 +245,10 @@
                 };
                 
             }
-        
+
         getVPAIDWrapper = function() {
-            var wrapper = new VPAIDWrapper();
+            wrapper = new VPAIDWrapper();
             wrapper.setCallbacksForCreative();
-            
             console.log("getVPAIDWrapper called");
             
             return wrapper;
@@ -278,6 +257,6 @@
         <script src="vpaid_script"></script>
         
         <div id="slot"></div>
-        <video id="videoslot" playsinline></video>
+        <video id="videoslot" playsinline title=""></video>
     </body>
 </html>

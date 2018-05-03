@@ -1,5 +1,18 @@
 # Samba iOS SDK
 
+## 1.1(9)
+
+### Features
+  * Add autoplay to default player
+  * VPAID native
+
+### Bug Fixes
+  * Fix for ad end not being tracked correctly when switching between online-offline modes for youtube and vast content
+
+### Refactoring
+  * Updated project for Xcode 9.3 and Swift 4.1
+  * Refactoring of presentation logic to remove the carousel product.
+
 ## 1.0(19)
 
 ### Features
