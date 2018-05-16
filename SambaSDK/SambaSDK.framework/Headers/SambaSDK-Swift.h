@@ -183,6 +183,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+enum AdState : NSInteger;
+@protocol AdManagerProtocol;
+@class UIViewController;
 
 /// Class which provides a full-screen ad at certain points in your application.
 /// It is recommended to implement the <code>AdManagerProtocol</code> in order to be notified about different
@@ -190,9 +193,55 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 /// to be shown or something went wrong.
 SWIFT_CLASS("_TtC8SambaSDK9AdManager")
 @interface AdManager : NSObject
+/// The state indicating whether the ad is ready to load, in the progress of loading, ready to show or already showing.
+/// Before performing operations for an ad, it is recommended that you check if the state is appropiate.
+/// The following restrictions apply:
+/// <ul>
+///   <li>
+///     loadAd works only when adManager is in state readyToLoad
+///   </li>
+///   <li>
+///     showAd works only when adManager is in readyToShow state
+///   </li>
+/// </ul>
+@property (nonatomic, readonly) enum AdState state;
+/// The delegate object of the <code>AdManagerProtocol</code>
+@property (nonatomic, weak) id <AdManagerProtocol> _Nullable delegate;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+/// Call this method to request the ad from the server.
+/// It is advised to call this method in advance so you have the ad ready to be displayed instantly.
+/// <h3>Usage example:</h3>
+/// \code
+/// self.adManager.loadAd()
+///
+/// \endcode
+- (void)loadAd;
+/// Call this method when you want to present modally an ad.
+/// This method will present an ad only if the <code>isReady</code> property is true.
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     viewController: the view controller which will present the ad
+///   </li>
+/// </ul>
+/// <h3>Usage example:</h3>
+/// \code
+/// self.adManager.show(from: self)
+///
+/// \endcode
+- (void)showAdFrom:(UIViewController * _Nonnull)viewController;
 @end
+
+/// Enum for the states that the AdManager can be in.
+typedef SWIFT_ENUM(NSInteger, AdState) {
+  AdStateReadyToLoad = 0,
+  AdStateLoading = 1,
+  AdStateReadyToShow = 2,
+  AdStateShowing = 3,
+};
 
 
 
@@ -272,6 +321,21 @@ SWIFT_PROTOCOL("_TtP8SambaSDK17AdManagerProtocol_")
 - (void)ageRestrictionNotMet:(AdManager * _Nonnull)adManager;
 @end
 
+/// Class that configures the target of the ads.
+typedef SWIFT_ENUM(NSInteger, Gender) {
+  GenderMale = 0,
+  GenderFemale = 1,
+  GenderUnknown = 2,
+};
+
+/// Class which provides different configurations used by the SDK.
+typedef SWIFT_ENUM(NSInteger, Orientation) {
+  OrientationAuto = 0,
+  OrientationPortrait = 1,
+  OrientationLandscape = 2,
+  OrientationMatchVideo = 3,
+};
+
 
 /// The SDK Info.
 /// It holds the info about the sdk (eg. versions, naming etc).
@@ -280,10 +344,26 @@ SWIFT_CLASS("_TtC8SambaSDK7SDKInfo")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class SambaSetup;
+@class VideoConfig;
+@class Target;
 
 /// This is the main class for SambaSDK.
 SWIFT_CLASS("_TtC8SambaSDK5Samba")
 @interface Samba : NSObject
+/// The singleton instance of AdManager.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) AdManager * _Null_unspecified adManager;)
++ (AdManager * _Null_unspecified)adManager SWIFT_WARN_UNUSED_RESULT;
++ (void)setAdManager:(AdManager * _Null_unspecified)value;
+/// This method has to be called in order to configure the SambaSDK.
+/// Parameters:
+/// setup - Check SambaSetup class for more details.
+/// videoConfig - Check VideoConfig class for more details. (this parameter is optional)
+/// target - Check Target class for more details. (this parameter is optional)
++ (void)configureWithSetup:(SambaSetup * _Nonnull)setup videoConfig:(VideoConfig * _Nullable)videoConfig target:(Target * _Nullable)target;
+/// This method can be called to clear the cache.
+/// It is not necessarily to be called, as the cache is automatically cleared after some time.
++ (void)clearCache;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -301,6 +381,19 @@ SWIFT_CLASS("_TtC8SambaSDK10SambaError")
 /// An instance of this class has to be created in order to use the SDK.
 SWIFT_CLASS("_TtC8SambaSDK10SambaSetup")
 @interface SambaSetup : NSObject
+/// Parameters:
+/// <ul>
+///   <li>
+///     userId - GUID, needs to be unique for each user.
+///   </li>
+///   <li>
+///     publisherId - the publisher id you received from Samba.
+///   </li>
+///   <li>
+///     secretKey - the secret key you received from Samba.
+///   </li>
+/// </ul>
+- (nonnull instancetype)initWithUserId:(NSString * _Nonnull)userId publisherId:(NSInteger)publisherId secretKey:(NSString * _Nonnull)secretKey OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
@@ -308,8 +401,11 @@ SWIFT_CLASS("_TtC8SambaSDK10SambaSetup")
 
 SWIFT_CLASS("_TtC8SambaSDK6Target")
 @interface Target : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+/// The user’s gender.
+@property (nonatomic) enum Gender gender;
+/// The user’s age.
+@property (nonatomic) NSInteger age;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -321,6 +417,7 @@ SWIFT_CLASS("_TtC8SambaSDK6Target")
 
 SWIFT_CLASS("_TtC8SambaSDK11VideoConfig")
 @interface VideoConfig : NSObject
+- (nonnull instancetype)initWithScreenOrientation:(enum Orientation)screenOrientation soundEnabled:(BOOL)soundEnabled optimizeDownloadOnMobileData:(BOOL)optimizeDownloadOnMobileData OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end

@@ -51,10 +51,7 @@ public static func configure(setup: SambaSetup, videoConfig: VideoConfig? = nil,
 
 There are 3 parameters you can configure however SambaSetup ```(params: userId, publisherId, secretKey)``` is the only one which is mandatory. ```userId``` is a String identifying each user in your app. It is good practice to use some kind of UUID, although another unique string will also work.  The ```publisherId``` and ```secretKey``` are obtained from Samba.
 
-In addition you can configure Target ```(params: age, gender)``` which represents the target audience and VideoConfig ```(params: screenOrientation, soundEnabled, optimizeDownloadOnMobileData)``` which configures the video settings.
-
-All parameters in the Target and VideoConfig objects are optional. 
-
+In addition you can configure ```Target ()``` which represents the target audience. Target has two configurable properties : ```gender: Gender``` and  ```age: Int``` . Also you can configure  VideoConfig ```(params: screenOrientation, soundEnabled, optimizeDownloadOnMobileData)``` which configures the video settings. All parameters in the VideoConfig object are optional.
 
 
 ## Sample code:
@@ -66,7 +63,9 @@ import SambaSDK
 
 let sambaSetup = SambaSetup(userId: currentUserId, publisherId: 0, secretKey: "YourSecretKey")
 
-let adTarget = Target(age: 25, gender: Gender.female)
+let adTarget = Target()
+adTarget.age = 25
+adTarget.gender = Gender.female
 
 let videoConfig = VideoConfig(screenOrientation: .auto, soundEnabled: true)
 

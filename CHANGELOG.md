@@ -1,5 +1,10 @@
 # Samba iOS SDK
 
+## 1.1(10)
+
+### Refactoring
+*  Adapted the SDK to be available for the Objective-C based projects.
+
 ## 1.1(9)
 
 ### Features

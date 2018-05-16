@@ -49,7 +49,9 @@ class ViewController: UIViewController {
         
         let gender = Gender.male
         let age = 25
-        let target = Target(age: age, gender: gender)
+        let target = Target()
+        target.age = age
+        target.gender = gender
         
         let isSoundEnabled = !disableVideoSoundAtStart
         let screenOrientation = Orientation.auto
