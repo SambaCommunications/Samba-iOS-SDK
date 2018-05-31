@@ -53,6 +53,9 @@ There are 3 parameters you can configure however SambaSetup ```(params: userId, 
 
 In addition you can configure ```Target ()``` which represents the target audience. Target has two configurable properties : ```gender: Gender``` and  ```age: Int``` . Also you can configure  VideoConfig ```(params: screenOrientation, soundEnabled, optimizeDownloadOnMobileData)``` which configures the video settings. All parameters in the VideoConfig object are optional.
 
+## App Transport Security
+
+The SDK uses 'http' based requests meaning your app need to have the 'NSAppTransportSecurity' flag set to 'NSAllowsArbitraryLoads'.
 
 ## Sample code:
 
@@ -124,7 +127,6 @@ The ```AdManagerProtocol``` includes the following events:
 | `func ageRestrictionNotMet(_ adManager: AdManager)` | Called if all the ads received were age restricted and the user is under-age. |
 
 **All callback methods are optional.**
-
 
 ## You're all set
 
